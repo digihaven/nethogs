@@ -1,6 +1,7 @@
 /* 
  * inode2prog.cpp
  *
+ * Copyright (c) 2015 Digihaven
  * Copyright (c) 2005,2006,2008,2009 Arnout Engelen
  *
  * This program is free software; you can redistribute it and/or
@@ -95,6 +96,12 @@ char * getprogname (pid_t pid) {
 		std::cout << "Error closing file: " << strerror(errno) << std::endl;
 		exit(34);
 	}
+	
+	// Include program args
+	for (int x=0; x<length; x++)
+		if (buffer[x]=='\0')
+			buffer[x]=' ';
+			
 	if (length < bufsize - 1)
 		buffer[length]='\0';
 
